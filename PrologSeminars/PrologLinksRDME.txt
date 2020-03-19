@@ -1,0 +1,10 @@
+Какво може да ползвате като платформа:
+SWI-Prolog (тази я препоръчвам) : http://www.swi-prolog.org/Download.html
+Strawberry Prolog : http://www.dobrev.com/download.html
+GNU Prolog : http://www.gprolog.org/
+и др.
+
+Други сайтове със задачи и документация:
+http://www.ic.unicamp.br/~meidanis/courses/mc336/2009s2/prolog/problemas/
+http://www.learnprolognow.org/
+http://www.swi-prolog.org/pldoc/index.html
