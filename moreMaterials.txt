@@ -2,7 +2,9 @@ https://github.com/YanaRGeorgieva/Logic-programming
 https://github.com/YanaRGeorgieva/Logic-programming-seminar
 https://github.com/NoHomey/logic-programming-2019
 https://github.com/stefk0/lp
+https://github.com/meftim0va/logic-programming
 
 Videos:
 https://www.youtube.com/playlist?list=PLIxyvw94C9FZ5QOqfm9_5fSOXInifeWBc
 https://www.youtube.com/playlist?list=PLN5MVnw72HPjVBfT3uDRLUADS3Z7VMR-r
+https://www.youtube.com/playlist?list=PLN5MVnw72HPiFoqUb7JEtuoeY9Axt4Ht6
