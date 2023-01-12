@@ -18,6 +18,21 @@ nthRest(X, 0, [X|R], R).
 nthRest(X, N, [Y|T], [Y|R]):-
     nthRest(X, M, T, R),
     N is M + 1.
+
+% Вар 2 в Иванчо, за Данчо е подобно.
+ivan_last_erased([K], K).
+ivan_last_erased([H|T], K):- 
+    T \= [], 
+    maxElement([H|T], Max, IdxMax),
+    ivan([H|T], IdxMax, K).
+
+ivan([K], 0, K).
+ivan(L, Start, K):- 
+    length(L, N), 
+    nthRest(Killed, Start, L, LnoKilled),
+    NewStart is (Start + 5) mod (N - 1), 
+    ivan(LnoKilled, NewStart, K).
+
 /* Задача 2
 За просто число p ≥ 2, с F_p бележим полето с носител {0, 1, . . . , p − 1} с операциите събиране и умножение по модул p.
 Представяне на вектор v ∈ F^n_p на пролог наричаме списък L_v с n елемента v1, v2, . . . , vn в този ред. 
@@ -72,7 +87,7 @@ subsequence([], []).
 subsequence([H|T], [H|R]):- subsequence(T, R).
 subsequence([_|T], R):- subsequence(T, R).
 
-properSubsequence(L, S):- subsequence(L, S), S \= [].
+notEmptySubsequence(L, S):- subsequence(L, S), S \= [].
 
 isZeroNVector(L):- forall(member(X, L), X =:= 0).
 
@@ -85,23 +100,26 @@ Equivalently, a basis for V is a set of vectors that is linearly independent and
 As a result, to check if a set of vectors form a basis for a vector space, 
 one needs to check that it is linearly independent and that it spans the vector space. 
 If at least one of these conditions fail to hold, then it is not a basis.
+In the theory of vector spaces, a set of vectors is said to be linearly dependent if 
+there is a nontrivial linear combination of the vectors that equals the zero vector.
+If no such linear combination exists, then the vectors are said to be linearly independent.
 */
 basisCondition(B, N, P):-
-    forall((properSubsequence(B, KSetOfVectors), 
-            length(KSetOfVectors, K), 
-            genNNumbersleP(KVector, K, P), 
-            atLeastOneNonZero(KVector),
-            linearCombination(KVector, KSetOfVectors, P, Res)),
-                not(isZeroNVector(Res))), % linearly independent
+    length(B, K), 
+    not((
+        genNNumbersleP(KVector, K, P), 
+        atLeastOneNonZero(KVector),
+        linearCombination(KVector, KSetOfVectors, P, Res),
+        isZeroNVector(Res)
+    )), % linearly independent
     forall((genNNumbersleP(L, N, P)), 
-                (properSubsequence(B, KSetOfVectors), 
+                (notEmptySubsequence(B, KSetOfVectors), 
                 length(KSetOfVectors, K), 
                 genNNumbersleP(KVector, K, P),
                 linearCombination(KVector, KSetOfVectors, P, L), % spans F^n_p
                 write(L), nl, write(KVector), nl, write(KSetOfVectors), nl)). 
 
-
-
+% За вариант 2 множество от N линейно независими вектори в това пространство пак е базис
 gen_basis(N, P, L, B):-
-    properSubsequence(L, B), 
+    notEmptySubsequence(L, B), 
     basisCondition(B, N, P).
